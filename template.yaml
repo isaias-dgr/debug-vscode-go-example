@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+Description: Una aplicación serverless en Go
+
+Resources:
+  MyGoFunction:
+    Type: "AWS::Serverless::Function"
+    Metadata:
+      BuildMethod: makefile
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: ./
+      MemorySize: 128
+      Timeout: 10
+
+Outputs:
+  MyGoFunctionArn:
+    Description: ARN de la función Go
+    Value:
+      Fn::GetAtt:
+        - MyGoFunction
+        - Arn
